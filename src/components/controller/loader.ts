@@ -1,6 +1,16 @@
 interface Options {
     apiKey?: string,
-    sources?: string
+    sources?: string,
+}
+
+interface Data {
+    category: string,
+    country: string,
+    description: string,
+    id: string,
+    language: string,
+    name: string,
+    url: string
 }
 
 class Loader {
@@ -41,7 +51,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: ({}: any) => void, options: Options) {
+    load(method: string, endpoint: string, callback: ({}: Data) => void, options: Options) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
